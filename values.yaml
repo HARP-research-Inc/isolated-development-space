@@ -1,0 +1,9 @@
+# The name of the development space
+name: test
+
+# Location of the certs generated via ./generate-tls-cert.sh
+certPath: ""
+
+dataPath: ""
+
+targetHostname: ""
