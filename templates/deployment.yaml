@@ -22,13 +22,7 @@ spec:
         - name: vscode-tunnel
           image: "ghcr.io/harp-research-inc/vscode-cli-tunnel-docker:{{ .Chart.AppVersion }}"
           imagePullPolicy: IfNotPresent
-          livenessProbe:
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - 'code tunnel status | jq | grep "\"tunnel\": null" && exit 1 || exit 0'
-            initialDelaySeconds: 10
+
           env:
             - name: VSCODE_CLI_DATA_DIR
               value: "/vscode/.tunnel"
