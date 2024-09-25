@@ -20,7 +20,7 @@ spec:
       serviceAccountName: "isolated-development-space-service-{{ .Values.name }}"
       containers:
         - name: vscode-tunnel
-          image: "ghcr.io/harp-research-inc/vscode-cli-tunnel-docker:{{ .Chart.AppVersion }}"
+          image: "ghcr.io/harp-research-inc/vscode-cli-tunnel-docker:{{ .Chart.AppVersion }}-full-dev"
           imagePullPolicy: IfNotPresent
 
           env:
