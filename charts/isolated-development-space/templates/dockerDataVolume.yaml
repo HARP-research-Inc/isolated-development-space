@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: "isolated-development-space-docker-data-{{ .Values.name }}"
+  labels:
+    app.kubernetes.io/name: "isolated-development-space-docker-data-{{ .Values.name }}"
+    app.kubernetes.io/component: "data"
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "local-storage-docker-data-{{ .Values.name }}"
+  local:
+    path: "{{ .Values.DockerDataPath }}"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - "{{ .Values.targetHostname }}"

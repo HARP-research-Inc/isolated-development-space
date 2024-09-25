@@ -59,6 +59,8 @@ spec:
               mountPath: "/vscode"
             - name: certs
               mountPath: "/certs"
+            - name: docker-data
+              mountPath: "/var/lib/docker"
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -66,3 +68,6 @@ spec:
         - name: certs
           persistentVolumeClaim:
             claimName: "isolated-development-space-certs-{{ .Values.name }}-claim"
+        - name: docker-data
+          persistentVolumeClaim:
+            claimName: "isolated-development-space-docker-data-{{ .Values.name }}-claim"
