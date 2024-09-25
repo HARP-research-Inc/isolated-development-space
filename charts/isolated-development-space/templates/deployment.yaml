@@ -50,6 +50,7 @@ spec:
                 - /bin/sh
                 - -c
                 - "docker info"
+            initialDelaySeconds: 15
           env:
             - name: DOCKER_TLS_CERTDIR
               value: "/certs"
