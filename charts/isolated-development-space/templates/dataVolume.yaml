@@ -14,7 +14,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: "local-storage-data-{{ .Values.name }}"
   local:
-    path: "{{ .Values.dataPath }}"
+    path: "{{ .Values.dataDirectories.data }}"
   nodeAffinity:
     required:
       nodeSelectorTerms:

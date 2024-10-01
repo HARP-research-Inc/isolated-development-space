@@ -14,7 +14,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: "local-storage-certs-{{ .Values.name }}"
   local:
-    path: "{{ .Values.certPath }}"
+    path: "{{ .Values.dataDirectories.certs }}"
   nodeAffinity:
     required:
       nodeSelectorTerms:

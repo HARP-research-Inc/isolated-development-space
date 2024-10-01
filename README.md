@@ -39,9 +39,21 @@ The list of values are:
 |    Value Name    | Description                                                                                                                                                                                                                                           | Required | Default Value    |
 |:----------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------:|------------------|
 |      `name`      | The name of the workspace.                                                                                                                                                                                                                            |    No    | `user-workspace` |
-|    `certPath`    | The directory containing the TLS certificates that the Docker client and server will use to communicate.                                                                                                                                              |    Yes   | N/A              |
-|    `dataPath`    | The directory containing the actual user workspace data. This is what will get mounted into `/vscode`.                                                                                                                                                |    Yes   | N/A              |
-| `dockerDataPath` | The directory containg the Docker daemon data. This will be used to preserve any built/pulled images and container data. If you do not care about preserving Docker images between restarts, you can mount this to `/tmp` or another tmpfs directory. |    Yes   | N/A              |
+|      `dataDirectories`      | An object containing keys for the various data paths. |    Yes    | N/A |
+|    `dataDirectories.certs`    | The directory containing the TLS certificates that the Docker client and server will use to communicate.                                                                                                                                              |    Yes   | N/A              |
+|    `dataDirectories.data`    | The directory containing the actual user workspace data. This is what will get mounted into `/vscode`.                                                                                                                                                |    Yes   | N/A              |
+| `dataDirectories.dockerData` | The directory containg the Docker daemon data. This will be used to preserve any built/pulled images and container data. If you do not care about preserving Docker images between restarts, you can mount this to `/tmp` or another tmpfs directory. |    Yes   | N/A              |
 | `targetHostname` | The hostname of the kubernetes node that will run the workspace. The hostname is the `kubernetes.io/hostname` label for the node.                                                                                                                     |    Yes   | N/A              |
+
+### Example `values.yaml`
+
+```yaml
+name: "user-workspace"
+dataDirectories:
+  certs: "/path/to/certs"
+  data: "/path/to/data"
+  dockerData: "/path/to/docker"
+targetHostname: "k8s-node-1"
+```
 
 ${\color{grey}\textsf{Copyright © 2024 HARP research, Inc. Visit us at }}$ [https://harpresearch.ai](https://harpresearch.ai)

@@ -14,7 +14,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: "local-storage-docker-data-{{ .Values.name }}"
   local:
-    path: "{{ .Values.dockerDataPath }}"
+    path: "{{ .Values.dataDirectories.dockerData }}"
   nodeAffinity:
     required:
       nodeSelectorTerms:

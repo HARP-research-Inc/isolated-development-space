@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the workspace.",
+      "default": "user-workspace"
+    },
+    "dataDirectories": {
+      "type": "object",
+      "description": "An object containing keys for the various data paths.",
+      "additionalProperties": false,
+      "properties": {
+        "certs": {
+          "type": "string",
+          "description": "The directory containing the TLS certificates that the Docker client and server will use to communicate.",
+          "minLength": 1
+        },
+        "data": {
+          "type": "string",
+          "description": "The directory containing the actual user workspace data. This is what will get mounted into `/vscode`.",
+          "minLength": 1
+        },
+        "dockerData": {
+          "type": "string",
+          "description": "The directory containg the Docker daemon data. This will be used to preserve any built/pulled images and container data. If you do not care about preserving Docker images between restarts, you can mount this to `/tmp` or another tmpfs directory.",
+          "minLength": 1
+        }
+      },
+      "required": ["certs", "data", "dockerData"]
+    },
+    "targetHostname": {
+      "type": "string",
+      "description": "The hostname of the kubernetes node that will run the workspace. The hostname is the `kubernetes.io/hostname` label for the node.",
+      "minLength": 1,
+      "format": "hostname"
+    }
+  },
+  "required": ["dataDirectories", "targetHostname"],
+  "title": "Values",
+  "type": "object"
+}
