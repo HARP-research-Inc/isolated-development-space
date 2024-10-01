@@ -25,9 +25,9 @@ helm install "$USER_NAME-workspace" \
   --namespace "$USER_NAME-workspace" \
   --create-namespace \
   --set name="$USER_NAME" \
-  --set certPath="$USER_DIRECTORY/certs" \
-  --set dataPath="$USER_DIRECTORY/data" \
-  --set dockerDataPath="$USER_DIRECTORY/docker" \
+  --set dataDirectories.certs="$USER_DIRECTORY/certs" \
+  --set dataDirectories.data="$USER_DIRECTORY/data" \
+  --set dataDirectories.dockerData="$USER_DIRECTORY/docker" \
   --set targetHostname="$TARGET_HOSTNAME" \
   isolated-development-space/isolated-development-space
 ```
