@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=../charts/isolated-development-space/values.schema.json
+
+dataDirectories:
+  certs: "/tmp/certs"
+  data: "/tmp/data"
+  dockerData: "/tmp/docker"
+targetHostname: "my-host"

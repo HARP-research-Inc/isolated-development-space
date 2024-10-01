@@ -1,6 +1,8 @@
 apiVersion: v2
-name: isolated-development-space
-description: A Helm chart for deploying dind and a vscode server tunnel
+home: "https://github.com/HARP-research-Inc/isolated-development-space"
+name: "isolated-development-space"
+description: "A Helm chart for deploying dind and a vscode server tunnel"
+icon: "https://avatars.githubusercontent.com/u/87340827?v=4"
 
 # A chart can be either an 'application' or a 'library' chart.
 #
