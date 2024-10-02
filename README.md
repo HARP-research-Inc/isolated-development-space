@@ -36,24 +36,46 @@ helm install "$USER_NAME-workspace" \
 
 The list of values are:
 
-|    Value Name    | Description                                                                                                                                                                                                                                           | Required | Default Value    |
-|:----------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------:|------------------|
-|      `name`      | The name of the workspace.                                                                                                                                                                                                                            |    No    | `user-workspace` |
-|      `dataDirectories`      | An object containing keys for the various data paths. |    Yes    | N/A |
-|    `dataDirectories.certs`    | The directory containing the TLS certificates that the Docker client and server will use to communicate.                                                                                                                                              |    Yes   | N/A              |
-|    `dataDirectories.data`    | The directory containing the actual user workspace data. This is what will get mounted into `/vscode`.                                                                                                                                                |    Yes   | N/A              |
-| `dataDirectories.dockerData` | The directory containg the Docker daemon data. This will be used to preserve any built/pulled images and container data. If you do not care about preserving Docker images between restarts, you can mount this to `/tmp` or another tmpfs directory. |    Yes   | N/A              |
-| `targetHostname` | The hostname of the kubernetes node that will run the workspace. The hostname is the `kubernetes.io/hostname` label for the node.                                                                                                                     |    Yes   | N/A              |
+<!-- add-values-table-here-start -->
+
+| Value Name | Description | Required | Default Value |
+|:---:|:---:|:---:|:---:|
+| `dataDirectories` | An object containing keys for the various data paths. | Yes | - |
+| `dataDirectories.certs` | The directory containing the TLS certificates that the Docker client and server will use to communicate. | Yes | - |
+| `dataDirectories.data` | The directory containing the actual user workspace data. This is what will get mounted into `/vscode`. | Yes | - |
+| `dataDirectories.dockerData` | The directory containg the Docker daemon data. This will be used to preserve any built/pulled images and container data. If you do not care about preserving Docker images between restarts, you can mount this to `/tmp` or another tmpfs directory. | Yes | - |
+| `image` | An object containing keys for the Docker image and tag to use for the workspace. | No | - |
+| `image.image` | The repository of the Docker image to use for the workspace. | No | `ghcr.io/harp-research-inc/vscode-cli-tunnel-docker` |
+| `image.tag` | The tag of the Docker image to use for the workspace. | No | `<appVersion>-full-dev` |
+| `name` | The name of the workspace. | No | `user-workspace` |
+| `targetHostname` | The hostname of the kubernetes node that will run the workspace. The hostname is the `kubernetes.io/hostname` label for the node. | Yes | - |
 
 ### Example `values.yaml`
 
+#### Minimal `values.yaml`
+
 ```yaml
-name: "user-workspace"
-dataDirectories:
+dataDirectories: 
   certs: "/path/to/certs"
   data: "/path/to/data"
-  dockerData: "/path/to/docker"
-targetHostname: "k8s-node-1"
+  dockerData: "/path/to/docker-data"
+targetHostname: "my-node-hostname"
 ```
+
+#### Full `values.yaml`
+
+```yaml
+dataDirectories: 
+  certs: "/path/to/certs"
+  data: "/path/to/data"
+  dockerData: "/path/to/docker-data"
+image: 
+  image: "ghcr.io/harp-research-inc/vscode-cli-tunnel-docker"
+  tag: "<appVersion>-full-dev"
+name: "user-workspace"
+targetHostname: "my-node-hostname"
+```
+
+<!-- add-values-table-here-end -->
 
 ${\color{grey}\textsf{Copyright © 2024 HARP research, Inc. Visit us at }}$ [https://harpresearch.ai](https://harpresearch.ai)

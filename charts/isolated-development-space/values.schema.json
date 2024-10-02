@@ -8,35 +8,69 @@
     },
     "dataDirectories": {
       "type": "object",
+      "title": "Data Directories",
       "description": "An object containing keys for the various data paths.",
       "additionalProperties": false,
       "properties": {
         "certs": {
           "type": "string",
           "description": "The directory containing the TLS certificates that the Docker client and server will use to communicate.",
-          "minLength": 1
+          "minLength": 1,
+          "examples": [
+            "/path/to/certs"
+          ]
         },
         "data": {
           "type": "string",
           "description": "The directory containing the actual user workspace data. This is what will get mounted into `/vscode`.",
-          "minLength": 1
+          "minLength": 1,
+          "examples": [
+            "/path/to/data"
+          ]
         },
         "dockerData": {
           "type": "string",
           "description": "The directory containg the Docker daemon data. This will be used to preserve any built/pulled images and container data. If you do not care about preserving Docker images between restarts, you can mount this to `/tmp` or another tmpfs directory.",
-          "minLength": 1
+          "minLength": 1,
+          "examples": [
+            "/path/to/docker-data"
+          ]
         }
       },
       "required": ["certs", "data", "dockerData"]
+    },
+    "image": {
+      "type": "object",
+      "title": "Image",
+      "description": "An object containing keys for the Docker image and tag to use for the workspace.",
+      "additionalProperties": false,
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The repository of the Docker image to use for the workspace.",
+          "default": "ghcr.io/harp-research-inc/vscode-cli-tunnel-docker",
+          "minLength": 1
+        },
+        "tag": {
+          "type": "string",
+          "description": "The tag of the Docker image to use for the workspace.",
+          "default": "<appVersion>-full-dev",
+          "minLength": 1
+        }
+      }
     },
     "targetHostname": {
       "type": "string",
       "description": "The hostname of the kubernetes node that will run the workspace. The hostname is the `kubernetes.io/hostname` label for the node.",
       "minLength": 1,
-      "format": "hostname"
+      "format": "hostname",
+      "examples": [
+        "my-node-hostname"
+      ]
     }
   },
   "required": ["dataDirectories", "targetHostname"],
   "title": "Values",
-  "type": "object"
+  "type": "object",
+  "description": "The values for the isolated development space Helm chart."
 }
