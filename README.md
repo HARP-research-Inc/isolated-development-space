@@ -48,6 +48,10 @@ The list of values are:
 | `image.image` | The repository of the Docker image to use for the workspace. | No | `ghcr.io/harp-research-inc/vscode-cli-tunnel-docker` |
 | `image.tag` | The tag of the Docker image to use for the workspace. | No | `<appVersion>-full-dev` |
 | `name` | The name of the workspace. | No | `user-workspace` |
+| `storage` | How much storage to reserve for the different data directories | No | - |
+| `storage.certs` | The amount of storage to reserve for the certs directory. | No | `10Mi` |
+| `storage.data` | The amount of storage to reserve for the data directory. | No | `10Gi` |
+| `storage.dockerData` | The amount of storage to reserve for the dockerData directory. | No | `10Gi` |
 | `targetHostname` | The hostname of the kubernetes node that will run the workspace. The hostname is the `kubernetes.io/hostname` label for the node. | Yes | - |
 
 ### Example `values.yaml`
@@ -73,6 +77,10 @@ image:
   image: "ghcr.io/harp-research-inc/vscode-cli-tunnel-docker"
   tag: "<appVersion>-full-dev"
 name: "user-workspace"
+storage: 
+  certs: "10Mi"
+  data: "10Gi"
+  dockerData: "10Gi"
 targetHostname: "my-node-hostname"
 ```
 

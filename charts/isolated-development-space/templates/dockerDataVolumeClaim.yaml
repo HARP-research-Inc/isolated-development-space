@@ -11,4 +11,4 @@ spec:
   storageClassName: "local-storage-docker-data-{{ .Values.name }}"
   resources:
     requests:
-      storage: 10Gi
+      storage: "{{ .Values.storage.dockerData }}"

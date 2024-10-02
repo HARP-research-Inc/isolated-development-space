@@ -67,6 +67,32 @@
       "examples": [
         "my-node-hostname"
       ]
+    },
+    "storage": {
+      "type": "object",
+      "title": "Storage",
+      "description": "How much storage to reserve for the different data directories",
+      "additionalProperties": false,
+      "properties": {
+        "certs": {
+          "type": "string",
+          "description": "The amount of storage to reserve for the certs directory.",
+          "default": "10Mi",
+          "minLength": 1
+        },
+        "data": {
+          "type": "string",
+          "description": "The amount of storage to reserve for the data directory.",
+          "default": "10Gi",
+          "minLength": 1
+        },
+        "dockerData": {
+          "type": "string",
+          "description": "The amount of storage to reserve for the dockerData directory.",
+          "default": "10Gi",
+          "minLength": 1
+        }
+      }
     }
   },
   "required": ["dataDirectories", "targetHostname"],

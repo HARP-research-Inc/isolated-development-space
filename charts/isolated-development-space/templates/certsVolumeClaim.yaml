@@ -11,4 +11,4 @@ spec:
   storageClassName: "local-storage-certs-{{ .Values.name }}"
   resources:
     requests:
-      storage: 10Mi
+      storage: "{{ .Values.storage.certs }}"
