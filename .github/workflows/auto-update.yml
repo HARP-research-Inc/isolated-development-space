@@ -27,8 +27,8 @@ jobs:
         run: |
           read MAJOR MINOR PATCH <<< "$(echo "$version" | awk -F. '{print $1 " " $2 " " $3}')"
           read CHARTMAJOR CHARTMINOR CHARTPATCH <<< "$(grep -E "^version: " charts/isolated-development-space/Chart.yaml | cut -c 11- | sed 's/.$//' | awk -F. '{print $1 " " $2 " " $3 + 1}')"
-          sed -i '' -E 's/^appVersion: .+/appVersion: "'$MAJOR.$MINOR.$PATCH'"/g' charts/isolated-development-space/Chart.yaml
-          sed -i '' -E 's/^version: .+/version: "'$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH'"/g' charts/isolated-development-space/Chart.yaml
+          sed -i -E 's/^appVersion: .+/appVersion: "'$MAJOR.$MINOR.$PATCH'"/g' charts/isolated-development-space/Chart.yaml
+          sed -i -E 's/^version: .+/version: "'$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH'"/g' charts/isolated-development-space/Chart.yaml
           git add .
           git commit -am "Update code CLI to $version"
           git tag -a "$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH" -m "Update code CLI to $version"
