@@ -20,6 +20,8 @@ jobs:
         id: get_version
         run: |
           printf "version=%s\n" "$(curl "https://update.code.visualstudio.com/api/update/linux-x64/stable/latest" | jq -r '.productVersion')" >> "${GITHUB_OUTPUT}"
+      - name: Set github user
+        uses: fregante/setup-git-user@v2
       - name: Update chart
         env:
           version: ${{ steps.get_version.outputs.version }}
