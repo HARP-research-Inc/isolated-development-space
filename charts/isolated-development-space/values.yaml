@@ -2,7 +2,7 @@
 
 name: "user-workspace"
 image:
-  image: ghcr.io/harp-research-inc/vscode-cli-tunnel-docker'
+  image: ghcr.io/harp-research-inc/vscode-cli-tunnel-docker
 storage:
   certs: "10Mi"
   data: "10Gi"
