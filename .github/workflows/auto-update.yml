@@ -36,4 +36,4 @@ jobs:
           git tag -a "$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH" -m "Update code CLI to $version"
           git push origin main
           git push origin "$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH"
-          gh workflow run release.yaml --ref "refs/tags/${version}"
+          gh workflow run release.yaml --ref "refs/tags/$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH"
