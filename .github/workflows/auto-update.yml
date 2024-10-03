@@ -1,0 +1,37 @@
+name: "Auto Update Helm Chart"
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+      - name: Get latest version
+        id: get_version
+        run: |
+          printf "version=%s\n" "$(curl "https://update.code.visualstudio.com/api/update/linux-x64/stable/latest" | jq -r '.productVersion')" >> "${GITHUB_OUTPUT}"
+      - name: Update chart
+        env:
+          version: ${{ steps.get_version.outputs.version }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MAJOR MINOR PATCH <<< "$(echo "$version" | awk -F. '{print $1 " " $2 " " $3}')""
+          read CHARTMAJOR CHARTMINOR CHARTPATCH <<< "$(grep -E "^version: " charts/isolated-development-space/Chart.yaml | cut -c 11- | sed 's/.$//' | awk -F. '{print $1 " " $2 " " $3 + 1}')"
+          sed -i '' -E 's/^appVersion: .+/appVersion: "'$MAJOR.$MINOR.$PATCH'"/g' charts/isolated-development-space/Chart.yaml
+          sed -i '' -E 's/^version: .+/version: "'$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH'"/g' charts/isolated-development-space/Chart.yaml
+          git add .
+          git commit -am "Update code CLI to $version"
+          git tag -a "$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH" -m "Update code CLI to $version"
+          git push origin main
+          git push origin "$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH"
+          gh workflow run release.yaml --ref "refs/tags/${version}"
