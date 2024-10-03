@@ -25,7 +25,7 @@ jobs:
           version: ${{ steps.get_version.outputs.version }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          read MAJOR MINOR PATCH <<< "$(echo "$version" | awk -F. '{print $1 " " $2 " " $3}')""
+          read MAJOR MINOR PATCH <<< "$(echo "$version" | awk -F. '{print $1 " " $2 " " $3}')"
           read CHARTMAJOR CHARTMINOR CHARTPATCH <<< "$(grep -E "^version: " charts/isolated-development-space/Chart.yaml | cut -c 11- | sed 's/.$//' | awk -F. '{print $1 " " $2 " " $3 + 1}')"
           sed -i '' -E 's/^appVersion: .+/appVersion: "'$MAJOR.$MINOR.$PATCH'"/g' charts/isolated-development-space/Chart.yaml
           sed -i '' -E 's/^version: .+/version: "'$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH'"/g' charts/isolated-development-space/Chart.yaml
