@@ -33,7 +33,6 @@ jobs:
           sed -i -E 's/^version: .+/version: "'$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH'"/g' charts/isolated-development-space/Chart.yaml
           git add .
           git commit -am "Update code CLI to $version"
-          git tag -a "$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH" -m "Update code CLI to $version"
           git push origin main
-          git push origin "$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH"
+          gh release create "$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH" -t "Release $CHARTMAJOR.$CHARTMINOR.$CHARTPATCH" --notes "This release matches version ${version} of the Visual Studio Code CLI."
           gh workflow run release.yaml --ref "refs/tags/$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH"
