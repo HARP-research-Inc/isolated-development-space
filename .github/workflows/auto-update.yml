@@ -30,6 +30,8 @@ jobs:
           read MAJOR MINOR PATCH <<< "$(echo "$version" | awk -F. '{print $1 " " $2 " " $3}')"
           read CHARTMAJOR CHARTMINOR CHARTPATCH <<< "$(grep -E "^version: " charts/isolated-development-space/Chart.yaml | cut -c 11- | sed 's/.$//' | awk -F. '{print $1 " " $2 " " $3 + 1}')"
           sed -i -E 's/^appVersion: .+/appVersion: "'$MAJOR.$MINOR.$PATCH'"/g' charts/isolated-development-space/Chart.yaml
+          # git diff --exit-code -- charts/isolated-development-space/Chart.yaml > /dev/null && echo "Didn't change" || echo "Did change"
+          git diff --exit-code -- charts/isolated-development-space/Chart.yaml > /dev/null && exit 0 # Only proceed if there was a change
           sed -i -E 's/^version: .+/version: "'$CHARTMAJOR.$CHARTMINOR.$CHARTPATCH'"/g' charts/isolated-development-space/Chart.yaml
           git add .
           git commit -am "Update code CLI to $version"
