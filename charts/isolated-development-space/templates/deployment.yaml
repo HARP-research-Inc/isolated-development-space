@@ -24,8 +24,6 @@ spec:
           imagePullPolicy: IfNotPresent
 
           env:
-            - name: VSCODE_CLI_DATA_DIR
-              value: "/vscode/.tunnel"
             - name: DOCKER_TLS_VERIFY
               value: "1"
             - name: DOCKER_CERT_PATH
