@@ -3,6 +3,18 @@ entries:
   isolated-development-space:
   - apiVersion: v2
     appVersion: 1.94.2
+    created: "2024-10-28T20:54:30.261787691Z"
+    description: A Helm chart for deploying dind and a vscode server tunnel
+    digest: a52633ee86464444640687234ff13d8e427a6a72ba3cba05aa71ad80f73d690c
+    home: https://github.com/HARP-research-Inc/isolated-development-space
+    icon: https://avatars.githubusercontent.com/u/87340827?v=4
+    name: isolated-development-space
+    type: application
+    urls:
+    - https://HARP-research-Inc.github.io/isolated-development-space/isolated-development-space-0.2.13.tgz
+    version: 0.2.13
+  - apiVersion: v2
+    appVersion: 1.94.2
     created: "2024-10-11T01:31:49.805235171Z"
     description: A Helm chart for deploying dind and a vscode server tunnel
     digest: f98015495ff8ae1a183522affe7a3e17fae64bb9db6360844a7c26d9cb15d5c5
@@ -227,4 +239,4 @@ entries:
     urls:
     - https://HARP-research-Inc.github.io/isolated-development-space/isolated-development-space-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-11T01:31:49.804865513Z"
+generated: "2024-10-28T20:54:30.261143752Z"
